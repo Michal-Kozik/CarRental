@@ -4,12 +4,66 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
     <title>Index XHTML</title>
-</head>
-<body>
-<h1>Hello World!</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-</body>
+</h:head>
+<h:body>
+<!--    <h1>Hello World!</h1>-->
+<!--    <br/>-->
+<!--    <a href="hello-servlet">Hello Servlet</a>-->
+<!--    <br/>-->
+    <h:form id="mainForm">
+        <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
+
+        <p:dataTable id="carTable" value="#{carController.cars}" var="car" rowKey="#{car.uid}"
+                     emptyMessage="Brak samochodów, dodaj nowy samochód"
+                     paginator="true"
+                     paginatorAlwaysVisible="false"
+                     paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                     rows="10"
+                     rowsPerPageTemplate="10">
+            <f:facet name="header">
+                Samochody
+            </f:facet>
+            <p:column headerText="ID">
+                #{car.id}
+            </p:column>
+            <p:column headerText="Marka">
+                #{car.brand}
+            </p:column>
+            <p:column headerText="Cena">
+                #{car.price}
+            </p:column>
+            <p:column headerText="Edytuj" width="80" style="text-align: center;">
+                Dodac przycisk
+            </p:column>
+            <p:column headerText="Usuń" width="80" style="text-align: center;">
+                Dodac przycisk
+            </p:column>
+            <f:facet name="footer">
+                <div style="text-align: left">
+                    <p:commandButton icon="fa fa-fw fa-plus" title="Dodaj samochód" action="#{carController.onAddCar()}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()"/>
+                </div>
+            </f:facet>
+        </p:dataTable>
+    </h:form>
+
+    <p:dialog id="carDlg" widgetVar="carDlg" dynamic="true" modal="true" header="Dane pojazdu" showEffect="fade" hideEffect="fade">
+        <h:form id="carDlgForm">
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Marka" for="@next"/>
+                <p:inputText id="brand" value="#{carController.editedCar.brand}" required="true" />
+                <p:outputLabel value="Cena" for="@next"/>
+                <p:inputText id="price" value="#{carController.editedCar.price}" required="true"/>
+            </h:panelGrid>
+            <!--                <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('clientDlg').hide()"  />-->
+            <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('carDlg').hide()"  />
+            <p:commandButton  value="Anuluj" action="#{carController.onCancelCar()}" process="@this" update=":mainForm:growl" oncomplete="PF('carDlg').hide()"  >
+                <p:resetInput target=":carDlgForm"/>
+            </p:commandButton>
+        </h:form>
+    </p:dialog>
+
+</h:body>
 </html>
