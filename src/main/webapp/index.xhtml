@@ -8,10 +8,6 @@
     <title>Index XHTML</title>
 </h:head>
 <h:body>
-<!--    <h1>Hello World!</h1>-->
-<!--    <br/>-->
-<!--    <a href="hello-servlet">Hello Servlet</a>-->
-<!--    <br/>-->
     <h:form id="mainForm">
         <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
 
@@ -31,6 +27,18 @@
             </p:column>
             <p:column headerText="Marka">
                 #{car.brand}
+            </p:column>
+            <p:column headerText="Ilość drzwi">
+                #{car.numberOfDoors}
+            </p:column>
+            <p:column headerText="Ilość miejsc">
+                #{car.numberOfSeats}
+            </p:column>
+            <p:column headerText="Manualna skrzynia biegów">
+                #{car.manualGearbox}
+            </p:column>
+            <p:column headerText="Klimatyzacja">
+                #{car.airConditioning}
             </p:column>
             <p:column headerText="Cena">
                 #{car.price}
@@ -53,17 +61,28 @@
         <h:form id="carDlgForm">
             <h:panelGrid columns="2">
                 <p:outputLabel value="Marka" for="@next"/>
-                <p:inputText id="brand" value="#{carController.editedCar.brand}" required="true" />
+                <p:inputText id="brand" value="#{carController.editedCar.brand}" required="true"/>
+                <p:outputLabel value="Ilość miejsc" for="@next"/>
+                <p:inputText id="numberOfSeats" value="#{carController.editedCar.numberOfSeats}" required="true"/>
+                <p:outputLabel value="Ilość drzwi" for="@next"/>
+                <p:inputText id="numberOfDoors" value="#{carController.editedCar.numberOfDoors}" required="true"/>
+                <p:outputLabel value="Klimatyzacja" for="@next"/>
+                <p:inputText id="airConditioning" value="#{carController.editedCar.airConditioning}" required="true"/>
+                <p:outputLabel value="Manualna skrzynia biegów" for="@next"/>
+                <p:inputText id="manualGearbox" value="#{carController.editedCar.manualGearbox}" required="true"/>
                 <p:outputLabel value="Cena" for="@next"/>
                 <p:inputText id="price" value="#{carController.editedCar.price}" required="true"/>
             </h:panelGrid>
-            <!--                <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('clientDlg').hide()"  />-->
-            <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('carDlg').hide()"  />
+            <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('carDlg').hide()"></p:commandButton>
             <p:commandButton  value="Anuluj" action="#{carController.onCancelCar()}" process="@this" update=":mainForm:growl" oncomplete="PF('carDlg').hide()"  >
                 <p:resetInput target=":carDlgForm"/>
             </p:commandButton>
         </h:form>
     </p:dialog>
 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Potwierdzenie" >
+        <p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>
 </h:body>
 </html>

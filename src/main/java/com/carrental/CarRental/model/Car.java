@@ -10,7 +10,7 @@ import java.util.List;
 })
 @Entity
 public class Car extends AbstractModel {
-//    public enum State { AVAILABLE, BOOKED, OCCUPIED}
+    public enum State { AVAILABLE, BOOKED, OCCUPIED}
 
     private String brand;
     private int numberOfSeats;
@@ -18,20 +18,22 @@ public class Car extends AbstractModel {
     private boolean airConditioning;
     private boolean manualGearbox;
     private BigDecimal price;
-//    @Enumerated
-//    private State state;
+    @Enumerated
+    private State state;
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new LinkedList<>();
 
-//    public Car() {
-//        brand = "Unknown";
-//        numberOfSeats = 0;
-//        numberOfDoors = 0;
-//        airConditioning = false;
-//        manualGearbox = false;
-//        price = BigDecimal.valueOf(0);
-//        state = State.OCCUPIED;
-//    }
+//    public Car() { }
+
+    public Car() {
+        brand = "Unknown";
+        numberOfSeats = 0;
+        numberOfDoors = 0;
+        airConditioning = false;
+        manualGearbox = false;
+        price = BigDecimal.valueOf(0);
+        state = State.OCCUPIED;
+    }
 
     // Getters and Setters.
     public String getBrand() {
@@ -84,7 +86,7 @@ public class Car extends AbstractModel {
 
     // Methods.
     public void addReservation(Reservation reservation) {
-        reservations.add(reservation);
+        this.reservations.add(reservation);
         reservation.setCar(this);
     }
 }
