@@ -84,6 +84,14 @@ public class Car extends AbstractModel {
         this.price = price;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     // Methods.
     public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);

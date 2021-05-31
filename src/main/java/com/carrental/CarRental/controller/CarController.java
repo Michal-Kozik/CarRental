@@ -50,7 +50,6 @@ public class CarController implements Serializable {
         if (editedCar.getId() == null) {
             cars.add(editedCar);
         }
-//        cars.add(editedCar);
         Car savedCar = carService.save(editedCar);
         cars.replaceAll(c -> c != editedCar ? c : savedCar);
         editedCar = null;

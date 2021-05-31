@@ -43,11 +43,16 @@
             <p:column headerText="Cena">
                 #{car.price}
             </p:column>
+            <p:column headerText="Stan">
+                #{car.state}
+            </p:column>
             <p:column headerText="Edytuj" width="80" style="text-align: center;">
-                Dodac przycisk
+                <p:commandButton icon="fa fa-fw fa-edit" title="Edytuj" action="#{carController.onEditCar(car)}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()" />
             </p:column>
             <p:column headerText="Usuń" width="80" style="text-align: center;">
-                Dodac przycisk
+                <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" action="#{carController.onRemoveCar(car)}" process="@this" update=":mainForm:carTable">
+                    <p:confirm message="Jesteś pewien, że chcesz usunąć ten pojazd?" icon="pi pi-exclamation-triangle" />
+                </p:commandButton>
             </p:column>
             <f:facet name="footer">
                 <div style="text-align: left">
@@ -84,5 +89,7 @@
         <p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
         <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
     </p:confirmDialog>
+
+    <h:link outcome="home" value="Wroc do menu" />
 </h:body>
 </html>
