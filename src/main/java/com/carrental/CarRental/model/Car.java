@@ -17,6 +17,7 @@ public class Car extends AbstractModel {
     private int numberOfDoors;
     private boolean airConditioning;
     private boolean manualGearbox;
+    @Column(precision = 13, scale = 2)
     private BigDecimal price;
     @Enumerated
     private State state;

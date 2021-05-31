@@ -37,7 +37,11 @@ public class CarController implements Serializable {
         this.editedCar = editedCar;
     }
 
-    // Methods.
+    public Car.State[] getCarStates() {
+        return Car.State.values();
+    }
+
+    // CRUD Methods.
     public void onAddCar() {
         editedCar = new Car();
     }
@@ -63,5 +67,14 @@ public class CarController implements Serializable {
     public void onCancelCar() {
         cars.replaceAll(c -> c != editedCar ? c : carService.findById(editedCar.getId()));
         editedCar = null;
+    }
+
+    //Other Methods.
+    public boolean isCarAvailable(Car car) {
+        if (car.getState() == Car.State.AVAILABLE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

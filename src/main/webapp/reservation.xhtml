@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Index XHTML</title>
+</h:head>
+<h:body>
+    <h:form id="mainForm">
+        <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
+
+        <p:dataTable id="carTable" value="#{carController.cars}" var="car" rowKey="#{car.uid}"
+                     emptyMessage="Brak samochodów dostępnych samochodów."
+                     paginator="true"
+                     paginatorAlwaysVisible="false"
+                     paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                     rows="5"
+                     rowsPerPageTemplate="5">
+            <f:facet name="header">
+                Samochody
+            </f:facet>
+            <p:column headerText="ID">
+                #{car.id}
+            </p:column>
+            <p:column headerText="Marka">
+                #{car.brand}
+            </p:column>
+            <p:column headerText="Ilość drzwi">
+                #{car.numberOfDoors}
+            </p:column>
+            <p:column headerText="Ilość miejsc">
+                #{car.numberOfSeats}
+            </p:column>
+            <p:column headerText="Manualna skrzynia biegów">
+                #{car.manualGearbox}
+            </p:column>
+            <p:column headerText="Klimatyzacja">
+                #{car.airConditioning}
+            </p:column>
+            <p:column headerText="Cena">
+                <h:outputText value="#{car.price}">
+                    <f:convertNumber locale="pl-PL" type="currency" currencySymbol="zł"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Stan">
+                #{car.state}
+            </p:column>
+            <p:column headerText="Zarezerwuj" width="80" style="text-align: center;">
+                <ui:fragment rendered="#{carController.isCarAvailable(car)}">
+                    <p:commandButton icon="fa fa-fw fa-edit" title="Zarezerwuj" />
+                </ui:fragment>
+                <ui:fragment rendered="#{!carController.isCarAvailable(car)}">
+                    <b style="color: darkred">Samochód nie jest aktualnie dostępny!</b>
+                </ui:fragment>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+    <h:link outcome="home" value="Wroc do menu" />
+</h:body>
+</html>

@@ -40,8 +40,10 @@
             <p:column headerText="Klimatyzacja">
                 #{car.airConditioning}
             </p:column>
-            <p:column headerText="Cena">
-                #{car.price}
+            <p:column headerText="Cena (zł)">
+                <h:outputText value="#{car.price}">
+                    <f:convertNumber locale="pl-PL" type="currency" currencySymbol="zł"/>
+                </h:outputText>
             </p:column>
             <p:column headerText="Stan">
                 #{car.state}
@@ -76,7 +78,13 @@
                 <p:outputLabel value="Manualna skrzynia biegów" for="@next"/>
                 <p:inputText id="manualGearbox" value="#{carController.editedCar.manualGearbox}" required="true"/>
                 <p:outputLabel value="Cena" for="@next"/>
-                <p:inputText id="price" value="#{carController.editedCar.price}" required="true"/>
+                <p:inputText id="price" value="#{carController.editedCar.price}" required="true">
+                    <f:convertNumber locale="pl-PL" type="currency"/>
+                </p:inputText>
+                <p:outputLabel value="Stan" for="@next"/>
+                <p:selectOneMenu id="state" value="#{carController.editedCar.state}" required="true">
+                    <f:selectItems value="#{carController.carStates}" var="state" itemValue="#{state}"/>
+                </p:selectOneMenu>
             </h:panelGrid>
             <p:commandButton value="Zapisz" action="#{carController.onSaveCar()}" process="@form" update=":mainForm" oncomplete="if (args &amp;&amp; !args.validationFailed) PF('carDlg').hide()"></p:commandButton>
             <p:commandButton  value="Anuluj" action="#{carController.onCancelCar()}" process="@this" update=":mainForm:growl" oncomplete="PF('carDlg').hide()"  >
