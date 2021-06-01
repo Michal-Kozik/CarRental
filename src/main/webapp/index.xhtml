@@ -8,61 +8,75 @@
     <title>Index XHTML</title>
 </h:head>
 <h:body>
-    <h:form id="mainForm">
-        <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
 
-        <p:dataTable id="carTable" value="#{carController.cars}" var="car" rowKey="#{car.uid}"
-                     emptyMessage="Brak samochodów, dodaj nowy samochód"
-                     paginator="true"
-                     paginatorAlwaysVisible="false"
-                     paginatorPosition="bottom"
-                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                     rows="10"
-                     rowsPerPageTemplate="10">
-            <f:facet name="header">
-                Samochody
-            </f:facet>
-            <p:column headerText="ID">
-                #{car.id}
-            </p:column>
-            <p:column headerText="Marka">
-                #{car.brand}
-            </p:column>
-            <p:column headerText="Ilość drzwi">
-                #{car.numberOfDoors}
-            </p:column>
-            <p:column headerText="Ilość miejsc">
-                #{car.numberOfSeats}
-            </p:column>
-            <p:column headerText="Manualna skrzynia biegów">
-                #{car.manualGearbox}
-            </p:column>
-            <p:column headerText="Klimatyzacja">
-                #{car.airConditioning}
-            </p:column>
-            <p:column headerText="Cena (zł)">
-                <h:outputText value="#{car.price}">
-                    <f:convertNumber locale="pl-PL" type="currency" currencySymbol="zł"/>
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Stan">
-                #{car.state}
-            </p:column>
-            <p:column headerText="Edytuj" width="80" style="text-align: center;">
-                <p:commandButton icon="fa fa-fw fa-edit" title="Edytuj" action="#{carController.onEditCar(car)}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()" />
-            </p:column>
-            <p:column headerText="Usuń" width="80" style="text-align: center;">
-                <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" action="#{carController.onRemoveCar(car)}" process="@this" update=":mainForm:carTable">
-                    <p:confirm message="Jesteś pewien, że chcesz usunąć ten pojazd?" icon="pi pi-exclamation-triangle" />
-                </p:commandButton>
-            </p:column>
-            <f:facet name="footer">
-                <div style="text-align: left">
-                    <p:commandButton icon="fa fa-fw fa-plus" title="Dodaj samochód" action="#{carController.onAddCar()}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()"/>
-                </div>
-            </f:facet>
-        </p:dataTable>
-    </h:form>
+    <p:tabMenu activeIndex="#{param.i}">
+        <p:menuitem value="Strona główna" outcome="home" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+        </p:menuitem>
+        <p:menuitem value="Samochody" outcome="index" icon="pi pi-fw pi-calendar">
+            <f:param name="i" value="1"/>
+        </p:menuitem>
+        <p:menuitem value="Rezerwacja" outcome="reservation" icon="pi pi-fw pi-pencil">
+            <f:param name="i" value="2"/>
+        </p:menuitem>
+    </p:tabMenu>
+
+    <div class="ui-card" style="padding: 5px">
+        <h:form id="mainForm">
+            <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
+            <p:dataTable id="carTable" value="#{carController.cars}" var="car" rowKey="#{car.uid}"
+                         emptyMessage="Brak samochodów, dodaj nowy samochód"
+                         paginator="true"
+                         paginatorAlwaysVisible="false"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         rows="10"
+                         rowsPerPageTemplate="10">
+                <f:facet name="header">
+                    Samochody
+                </f:facet>
+                <p:column headerText="ID">
+                    #{car.id}
+                </p:column>
+                <p:column headerText="Marka">
+                    #{car.brand}
+                </p:column>
+                <p:column headerText="Ilość drzwi">
+                    #{car.numberOfDoors}
+                </p:column>
+                <p:column headerText="Ilość miejsc">
+                    #{car.numberOfSeats}
+                </p:column>
+                <p:column headerText="Manualna skrzynia biegów">
+                    #{car.manualGearbox}
+                </p:column>
+                <p:column headerText="Klimatyzacja">
+                    #{car.airConditioning}
+                </p:column>
+                <p:column headerText="Cena (zł)">
+                    <h:outputText value="#{car.price}">
+                        <f:convertNumber locale="pl-PL" type="currency" currencySymbol="zł"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Stan">
+                    #{car.state}
+                </p:column>
+                <p:column headerText="Edytuj" width="80" style="text-align: center;">
+                    <p:commandButton icon="fa fa-fw fa-edit" title="Edytuj" action="#{carController.onEditCar(car)}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()" />
+                </p:column>
+                <p:column headerText="Usuń" width="80" style="text-align: center;">
+                    <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" action="#{carController.onRemoveCar(car)}" process="@this" update=":mainForm:carTable">
+                        <p:confirm message="Jesteś pewien, że chcesz usunąć ten pojazd?" icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <div style="text-align: left">
+                        <p:commandButton icon="fa fa-fw fa-plus" title="Dodaj samochód" action="#{carController.onAddCar()}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()"/>
+                    </div>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </div>
 
     <p:dialog id="carDlg" widgetVar="carDlg" dynamic="true" modal="true" header="Dane pojazdu" showEffect="fade" hideEffect="fade">
         <h:form id="carDlgForm">
@@ -98,6 +112,5 @@
         <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
     </p:confirmDialog>
 
-    <h:link outcome="home" value="Wroc do menu" />
 </h:body>
 </html>

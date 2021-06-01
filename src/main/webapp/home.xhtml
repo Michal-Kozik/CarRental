@@ -8,10 +8,22 @@
     <title>Home XHTML</title>
 </h:head>
 <h:body>
-    Menu
-    <br/>
-    <h:link outcome="index" value="Dodawanie samochodow" />
-    <br/>
-    <h:link outcome="reservation" value="Rezerwacja" />
+
+    <p:tabMenu activeIndex="#{param.i}">
+        <p:menuitem value="Strona główna" outcome="home" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+        </p:menuitem>
+        <p:menuitem value="Samochody" outcome="index" icon="pi pi-fw pi-calendar">
+            <f:param name="i" value="1"/>
+        </p:menuitem>
+        <p:menuitem value="Rezerwacja" outcome="reservation" icon="pi pi-fw pi-pencil">
+            <f:param name="i" value="2"/>
+        </p:menuitem>
+    </p:tabMenu>
+
+    <div class="ui-card" style="padding: 5px">
+        <p>Strona główna</p>
+    </div>
+
 </h:body>
 </html>
