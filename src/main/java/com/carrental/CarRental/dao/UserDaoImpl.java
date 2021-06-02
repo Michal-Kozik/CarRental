@@ -13,7 +13,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
-//        return Optional.ofNullable(entityManager.find(User.class, login));
         try {
             TypedQuery<User> query = entityManager.createNamedQuery("User.findByLogin", User.class);
             query.setParameter("login", login);
@@ -22,6 +21,12 @@ public class UserDaoImpl implements UserDao {
         } catch (NoResultException nre) {
             return Optional.empty();
         }
+    }
 
+    @Override
+    public void saveUser(User user) {
+        if (user.getId() == null)
+            entityManager.persist(user);
+        entityManager.merge(user);
     }
 }

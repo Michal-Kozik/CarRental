@@ -11,19 +11,26 @@ public class User extends AbstractModel {
     @Column(unique = true)
     private String login;
     private String password;
+    private String firstName;
+    private String lastName;
     @Email
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations = new LinkedList<>();
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserGroup> userGroups = new LinkedList<>();
 
     public User() { }
 
-    public User(String login, String password, String email) {
+    public User(String login, String password, String email, String firstName, String lastName) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     // Getters and Setters.
@@ -59,6 +66,22 @@ public class User extends AbstractModel {
         this.userGroups = userGroups;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     // Methods.
     public void addGroup(String name) {
         for (UserGroup userGroup : userGroups) {
@@ -67,5 +90,10 @@ public class User extends AbstractModel {
             }
         }
         userGroups.add(new UserGroup(name, this));
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setUser(this);
     }
 }

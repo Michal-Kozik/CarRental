@@ -14,7 +14,7 @@ public class Reservation extends AbstractModel {
     private Car car;
     @ManyToOne
     @NotNull
-    private Client client;
+    private User user;
 
     // Getters and Setters.
     public Date getReservationFrom() {
@@ -41,11 +41,11 @@ public class Reservation extends AbstractModel {
         this.car = car;
     }
 
-    public Client getClient() {
-        return client;
+    public User getUser() {
+        return user;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

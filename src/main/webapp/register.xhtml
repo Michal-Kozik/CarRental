@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-    <title>Home XHTML</title>
 </h:head>
 <h:body>
     <p:tabMenu activeIndex="#{param.i}">
@@ -22,16 +21,24 @@
         <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
             <f:param name="i" value="3"/>
         </p:menuitem>
-        <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="register" icon="pi pi-fw pi-user-plus">
-            <f:param name="i" value="4"/>
-        </p:menuitem>
         <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
-            <f:param name="i" value="5"/>
+            <f:param name="i" value="4"/>
         </p:menuitem>
     </p:tabMenu>
 
     <div class="ui-card" style="padding: 5px">
-        <p>Strona główna</p>
+        <h:form>
+            <p:panel header="Stwórz konto">
+                <p:growl id="growl" sticky="true"  life="3000" />
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="login" value="Login" />
+                    <p:inputText id="login" value="#{loginController.login}" required="true"  />
+                    <p:outputLabel for="password" value="Hasło" />
+                    <p:password id="password" value="#{loginController.password}" required="true"  />
+                </h:panelGrid>
+                <p:commandButton value="Zaloguj" ajax="false" action="#{loginController.onLogin}" />
+            </p:panel>
+        </h:form>
     </div>
 
 </h:body>

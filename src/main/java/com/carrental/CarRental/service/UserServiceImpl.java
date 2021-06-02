@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByLogin(login).orElse(null);
         return user != null ? password.equals(user.getPassword()) : false;
     }
+
+    @Override
+    public void addUser(User user) {
+        userDao.saveUser(user);
+    }
 }
