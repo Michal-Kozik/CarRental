@@ -15,11 +15,14 @@
         <p:menuitem value="Samochody" outcome="index" icon="pi pi-fw pi-calendar">
             <f:param name="i" value="1"/>
         </p:menuitem>
-        <p:menuitem value="Rezerwacja" outcome="reservation" icon="pi pi-fw pi-pencil">
+        <p:menuitem value="Rezerwacja" outcome="reservation" icon="pi pi-fw pi-ticket">
             <f:param name="i" value="2"/>
         </p:menuitem>
-        <p:menuitem value="Logowanie" outcome="login" icon="pi pi-fw pi-id-card">
+        <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
             <f:param name="i" value="3"/>
+        </p:menuitem>
+        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
+            <f:param name="i" value="4"/>
         </p:menuitem>
     </p:tabMenu>
 

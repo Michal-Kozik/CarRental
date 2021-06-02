@@ -26,7 +26,7 @@ public class User extends AbstractModel {
         this.email = email;
     }
 
-    // Getters and Setters
+    // Getters and Setters.
     public String getLogin() {
         return login;
     }
@@ -49,5 +49,23 @@ public class User extends AbstractModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
+    }
+
+    // Methods.
+    public void addGroup(String name) {
+        for (UserGroup userGroup : userGroups) {
+            if (userGroup.getName().equals(name)) {
+                throw new IllegalArgumentException();
+            }
+        }
+        userGroups.add(new UserGroup(name, this));
     }
 }
