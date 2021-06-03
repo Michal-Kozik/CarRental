@@ -5,6 +5,7 @@ import com.carrental.CarRental.model.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class UserServiceImpl implements UserService {
