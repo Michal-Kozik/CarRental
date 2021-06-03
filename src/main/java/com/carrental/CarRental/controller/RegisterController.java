@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 
 @Named
@@ -35,9 +36,10 @@ public class RegisterController implements Serializable {
         newUser = new User();
     }
 
-    public void onRegisterUser() {
+    public String onRegisterUser() {
         newUser.addGroup("ROLE_CLIENT");
         userService.saveUser(newUser);
         newUser = null;
+        return "home";
     }
 }
