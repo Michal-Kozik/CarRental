@@ -13,10 +13,10 @@
         <p:menuitem value="Strona główna" outcome="home" icon="pi pi-fw pi-home">
             <f:param name="i" value="0"/>
         </p:menuitem>
-        <p:menuitem value="Samochody" outcome="index" icon="pi pi-fw pi-calendar">
+        <p:menuitem value="Samochody" outcome="forAdmin/cars" icon="pi pi-fw pi-calendar">
             <f:param name="i" value="1"/>
         </p:menuitem>
-        <p:menuitem value="Rezerwacja" outcome="reservation" icon="pi pi-fw pi-ticket">
+        <p:menuitem value="Rezerwacja" outcome="forClient/reservation" icon="pi pi-fw pi-ticket">
             <f:param name="i" value="2"/>
         </p:menuitem>
         <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
@@ -25,8 +25,8 @@
         <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="register" icon="pi pi-fw pi-user-plus">
             <f:param name="i" value="4"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
-            <f:param name="i" value="5"/>
+        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="forClient/profile" icon="pi pi-fw pi-user">
+            <f:param name="i" value="3"/>
         </p:menuitem>
     </p:tabMenu>
 
