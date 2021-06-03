@@ -23,7 +23,13 @@ public class User extends AbstractModel {
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserGroup> userGroups = new LinkedList<>();
 
-    public User() { }
+    public User() {
+        login = "loginExample";
+        password = "passwordExample";
+        email = "example@gmail.com";
+        firstName = "firstNameExample";
+        lastName = "lastNameExample";
+    }
 
     public User(String login, String password, String email, String firstName, String lastName) {
         this.login = login;

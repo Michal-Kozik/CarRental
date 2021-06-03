@@ -22,8 +22,11 @@
         <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
             <f:param name="i" value="3"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
+        <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="register" icon="pi pi-fw pi-user-plus">
             <f:param name="i" value="4"/>
+        </p:menuitem>
+        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
+            <f:param name="i" value="5"/>
         </p:menuitem>
     </p:tabMenu>
 

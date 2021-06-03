@@ -21,8 +21,11 @@
         <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
             <f:param name="i" value="3"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
+        <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="register" icon="pi pi-fw pi-user-plus">
             <f:param name="i" value="4"/>
+        </p:menuitem>
+        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="profile" icon="pi pi-fw pi-user">
+            <f:param name="i" value="5"/>
         </p:menuitem>
     </p:tabMenu>
 
@@ -32,11 +35,17 @@
                 <p:growl id="growl" sticky="true"  life="3000" />
                 <h:panelGrid columns="2" cellpadding="5">
                     <p:outputLabel for="login" value="Login" />
-                    <p:inputText id="login" value="#{loginController.login}" required="true"  />
+                    <p:inputText id="login" value="#{registerController.newUser.login}" required="true"  />
                     <p:outputLabel for="password" value="Hasło" />
-                    <p:password id="password" value="#{loginController.password}" required="true"  />
+                    <p:password id="password" value="#{registerController.newUser.password}" required="true"  />
+                    <p:outputLabel for="email" value="Email" />
+                    <p:inputText id="email" value="#{registerController.newUser.email}" required="true"  />
+                    <p:outputLabel for="firstName" value="Imię" />
+                    <p:inputText id="firstName" value="#{registerController.newUser.firstName}" required="true"  />
+                    <p:outputLabel for="lastName" value="Nazwisko" />
+                    <p:inputText id="lastName" value="#{registerController.newUser.lastName}" required="true"  />
                 </h:panelGrid>
-                <p:commandButton value="Zaloguj" ajax="false" action="#{loginController.onLogin}" />
+                <p:commandButton value="Stwórz" ajax="false" action="#{registerController.onRegisterUser}" />
             </p:panel>
         </h:form>
     </div>
