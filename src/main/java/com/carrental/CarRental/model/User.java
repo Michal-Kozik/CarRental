@@ -5,7 +5,10 @@ import javax.validation.constraints.Email;
 import java.util.LinkedList;
 import java.util.List;
 
-@NamedQuery(name = "User.findByLogin", query = "SELECT u FROM User u WHERE u.login=:login")
+@NamedQueries({
+        @NamedQuery(name = "User.findByLogin", query = "SELECT u FROM User u WHERE u.login=:login"),
+        @NamedQuery(name = "User.findByLoginOrEmail", query = "SELECT u FROM User u WHERE u.login=:login OR u.email=:email")
+})
 @Entity
 public class User extends AbstractModel {
     @Column(unique = true)

@@ -24,7 +24,7 @@ public class AuthFilter implements Filter {
         if (path.startsWith("/forClient/")) {
             if (!userBean.isLogged()) {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
-                response.sendRedirect(request.getContextPath()+"/login.xhtml?i=3");
+                response.sendRedirect(request.getContextPath()+"/login.xhtml");
                 return;
             }
         }

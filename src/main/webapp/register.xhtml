@@ -8,7 +8,7 @@
 <h:head>
 </h:head>
 <h:body>
-    <p:tabMenu activeIndex="#{param.i}">
+    <p:tabMenu activeIndex="4">
         <p:menuitem value="Strona główna" outcome="home" icon="pi pi-fw pi-home">
             <f:param name="i" value="0"/>
         </p:menuitem>
@@ -46,6 +46,10 @@
                     <p:inputText id="lastName" value="#{registerController.newUser.lastName}" required="true" placeholder="Wpisz nazwisko"  />
                 </h:panelGrid>
                 <p:commandButton value="Stwórz" ajax="false" action="#{registerController.onRegisterUser}" />
+                <br />
+                <ui:fragment rendered="#{registerController.loginOrEmailInvalid}">
+                    <h:outputText value="Wybrany login lub email jest zajęty." style="color: darkred"/>
+                </ui:fragment>
             </p:panel>
         </h:form>
     </div>

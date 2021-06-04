@@ -25,6 +25,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> findByLoginOrEmail(String login, String email) {
+        try {
+            TypedQuery<User> query = entityManager.createNamedQuery("User.findByLoginOrEmail", User.class);
+            query.setParameter("login", login);
+            query.setParameter("email", email);
+            User result = query.getSingleResult();
+            return Optional.of(result);
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public void saveUser(User user) {
         if (user.getId() == null)
             entityManager.persist(user);

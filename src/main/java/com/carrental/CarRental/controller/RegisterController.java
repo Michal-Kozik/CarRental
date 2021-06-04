@@ -16,10 +16,12 @@ public class RegisterController implements Serializable {
     @EJB
     private UserService userService;
     private User newUser;
+    private boolean isLoginOrEmailInvalid;
 
     @PostConstruct
     private void initUser() {
         addUser();
+        isLoginOrEmailInvalid = false;
     }
 
     // Getters and Setters.
@@ -31,15 +33,24 @@ public class RegisterController implements Serializable {
         this.newUser = newUser;
     }
 
+    public boolean isLoginOrEmailInvalid() {
+        return isLoginOrEmailInvalid;
+    }
+
     // Methods.
     public void addUser() {
         newUser = new User();
     }
 
     public String onRegisterUser() {
-        newUser.addGroup("ROLE_CLIENT");
-        userService.saveUser(newUser);
-        newUser = null;
-        return "home";
+        if (userService.findByLoginOrEmail(newUser.getLogin(), newUser.getEmail()) != null) {
+            isLoginOrEmailInvalid = true;
+            return null;
+        } else {
+            newUser.addGroup("ROLE_CLIENT");
+            userService.saveUser(newUser);
+            newUser = null;
+            return "home";
+        }
     }
 }
