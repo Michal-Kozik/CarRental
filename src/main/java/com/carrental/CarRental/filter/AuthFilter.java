@@ -1,6 +1,7 @@
 package com.carrental.CarRental.filter;
 
 import com.carrental.CarRental.bean.UserBean;
+import com.carrental.CarRental.model.UserGroup;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -25,6 +26,18 @@ public class AuthFilter implements Filter {
             if (!userBean.isLogged()) {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
                 response.sendRedirect(request.getContextPath()+"/login.xhtml");
+                return;
+            }
+        }
+        if (path.startsWith("/forAdmin/")) {
+            if (!userBean.isLogged()) {
+                HttpServletResponse response = (HttpServletResponse) servletResponse;
+                response.sendRedirect(request.getContextPath()+"/login.xhtml");
+                return;
+            }
+            if (userBean.isLogged() && !userBean.hasAdminRights()) {
+                HttpServletResponse response = (HttpServletResponse) servletResponse;
+                response.sendRedirect(request.getContextPath()+"/errors/forbidden-403.xhtml");
                 return;
             }
         }

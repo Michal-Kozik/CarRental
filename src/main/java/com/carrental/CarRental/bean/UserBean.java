@@ -33,4 +33,14 @@ public class UserBean implements Serializable {
     public void setRoles(List<UserGroup> roles) {
         this.roles = roles;
     }
+
+    // Methods
+    public boolean hasAdminRights() {
+        for (UserGroup userGroup : roles) {
+            if (userGroup.getName().equals("ROLE_ADMIN")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

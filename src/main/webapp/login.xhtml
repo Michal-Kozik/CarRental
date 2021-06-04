@@ -8,23 +8,23 @@
 <h:head>
 </h:head>
 <h:body>
-    <p:tabMenu activeIndex="3">
-        <p:menuitem value="Strona główna" outcome="home" icon="pi pi-fw pi-home">
+    <p:tabMenu activeIndex="1">
+        <p:menuitem value="Strona główna" outcome="/home" icon="pi pi-fw pi-home">
             <f:param name="i" value="0"/>
         </p:menuitem>
-        <p:menuitem value="Samochody" outcome="forAdmin/cars" icon="pi pi-fw pi-calendar">
+        <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="/login" icon="pi pi-fw pi-user-edit">
             <f:param name="i" value="1"/>
         </p:menuitem>
-        <p:menuitem value="Rezerwacja" outcome="forClient/reservation" icon="pi pi-fw pi-ticket">
+        <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="/register" icon="pi pi-fw pi-user-plus">
             <f:param name="i" value="2"/>
         </p:menuitem>
-        <p:menuitem rendered="#{!userBean.logged}" value="Logowanie" outcome="login" icon="pi pi-fw pi-user-edit">
-            <f:param name="i" value="3"/>
+        <p:menuitem rendered="#{userBean.logged}" value="Rezerwacja" outcome="/forClient/reservation" icon="pi pi-fw pi-ticket">
+            <f:param name="i" value="1"/>
         </p:menuitem>
-        <p:menuitem rendered="#{!userBean.logged}" value="Rejestracja" outcome="register" icon="pi pi-fw pi-user-plus">
-            <f:param name="i" value="4"/>
+        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="/forClient/profile" icon="pi pi-fw pi-user">
+            <f:param name="i" value="2"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="forClient/profile" icon="pi pi-fw pi-user">
+        <p:menuitem rendered="#{userBean.logged and userBean.hasAdminRights()}" value="Zarządzanie samochodami" outcome="/forAdmin/cars" icon="pi pi-fw pi-calendar">
             <f:param name="i" value="3"/>
         </p:menuitem>
     </p:tabMenu>
