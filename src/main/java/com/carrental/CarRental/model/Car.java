@@ -6,7 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c")
+        @NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
+        @NamedQuery(name = "Car.findAvailableCars", query = "SELECT c FROM Car c WHERE c.state=com.carrental.CarRental.model.Car.State.AVAILABLE")
 })
 @Entity
 public class Car extends AbstractModel {

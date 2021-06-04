@@ -35,4 +35,9 @@ public class CarDaoImpl implements CarDao {
     public List<Car> findAll() {
         return entityManager.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
+
+    @Override
+    public List<Car> findAvailableCars() {
+        return entityManager.createNamedQuery("Car.findAvailableCars", Car.class).getResultList();
+    }
 }

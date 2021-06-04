@@ -33,7 +33,7 @@
     <div class="ui-card" style="padding: 5px">
         <h:form id="mainForm">
             <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
-            <p:dataTable id="carTable" value="#{carController.cars}" var="car" rowKey="#{car.uid}"
+            <p:dataTable id="carTable" value="#{reservationController.cars}" var="car" rowKey="#{car.uid}"
                          emptyMessage="Brak samochodów dostępnych samochodów."
                          paginator="true"
                          paginatorAlwaysVisible="false"
@@ -42,7 +42,7 @@
                          rows="5"
                          rowsPerPageTemplate="5">
                 <f:facet name="header">
-                    Samochody
+                    Dostępne samochody
                 </f:facet>
                 <p:column headerText="ID">
                     #{car.id}
@@ -71,12 +71,7 @@
                     #{car.state}
                 </p:column>
                 <p:column headerText="Zarezerwuj" width="80" style="text-align: center;">
-                    <ui:fragment rendered="#{carController.isCarAvailable(car)}">
-                        <p:commandButton icon="fa fa-fw fa-edit" title="Zarezerwuj" />
-                    </ui:fragment>
-                    <ui:fragment rendered="#{!carController.isCarAvailable(car)}">
-                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true" />
-                    </ui:fragment>
+                    <p:commandButton icon="fa fa-fw fa-shopping-cart" title="Zarezerwuj" />
                 </p:column>
             </p:dataTable>
         </h:form>

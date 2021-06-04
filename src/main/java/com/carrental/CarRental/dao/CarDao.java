@@ -9,4 +9,5 @@ public interface CarDao {
     void delete(Car t);
     Car findById(Long id);
     List<Car> findAll();
+    List<Car> findAvailableCars();
 }
