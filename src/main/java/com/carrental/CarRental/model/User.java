@@ -7,7 +7,8 @@ import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = "User.findByLogin", query = "SELECT u FROM User u WHERE u.login=:login"),
-        @NamedQuery(name = "User.findByLoginOrEmail", query = "SELECT u FROM User u WHERE u.login=:login OR u.email=:email")
+        @NamedQuery(name = "User.findByLoginOrEmail", query = "SELECT u FROM User u WHERE u.login=:login OR u.email=:email"),
+        @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 })
 @Entity
 public class User extends AbstractModel {
@@ -98,5 +99,14 @@ public class User extends AbstractModel {
     public void addReservation(Reservation reservation) {
         reservations.add(reservation);
         reservation.setUser(this);
+    }
+
+    public boolean hasAdminRole() {
+        for (UserGroup userGroup : userGroups) {
+            if (userGroup.getName().equals("ROLE_ADMIN")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

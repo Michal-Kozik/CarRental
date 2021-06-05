@@ -13,7 +13,7 @@ import java.util.List;
 public class UserBean implements Serializable {
     private String login;
     private User user;
-    private List<UserGroup> roles;
+//    private List<UserGroup> roles;
 
     public boolean isLogged() {
         return login != null;
@@ -28,13 +28,13 @@ public class UserBean implements Serializable {
         this.login = login;
     }
 
-    public List<UserGroup> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<UserGroup> roles) {
-        this.roles = roles;
-    }
+//    public List<UserGroup> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<UserGroup> roles) {
+//        this.roles = roles;
+//    }
 
     public User getUser() {
         return user;
@@ -42,15 +42,5 @@ public class UserBean implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    // Methods
-    public boolean hasAdminRights() {
-        for (UserGroup userGroup : roles) {
-            if (userGroup.getName().equals("ROLE_ADMIN")) {
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -1,14 +1,15 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+    <title>Index XHTML</title>
 </h:head>
 <h:body>
-    <p:tabMenu activeIndex="2">
+    <p:tabMenu activeIndex="6">
         <p:menuitem value="Strona główna" outcome="/home" icon="pi pi-fw pi-home">
             <f:param name="i" value="0"/>
         </p:menuitem>
@@ -39,27 +40,43 @@
     </p:tabMenu>
 
     <div class="ui-card" style="padding: 5px">
-        <h:form>
-            <p:panel header="Stwórz konto">
-                <p:growl id="growl" sticky="true"  life="3000" />
-                <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel for="login" value="Login" />
-                    <p:inputText id="login" value="#{registerController.newUser.login}" required="true" placeholder="Wpisz login" />
-                    <p:outputLabel for="password" value="Hasło" />
-                    <p:password id="password" value="#{registerController.newUser.password}" required="true" placeholder="Wpisz hasło" />
-                    <p:outputLabel for="email" value="Email" />
-                    <p:inputText id="email" value="#{registerController.newUser.email}" required="true" placeholder="abc@gmail.com" />
-                    <p:outputLabel for="firstName" value="Imię" />
-                    <p:inputText id="firstName" value="#{registerController.newUser.firstName}" required="true" placeholder="Wpisz imię"  />
-                    <p:outputLabel for="lastName" value="Nazwisko" />
-                    <p:inputText id="lastName" value="#{registerController.newUser.lastName}" required="true" placeholder="Wpisz nazwisko"  />
-                </h:panelGrid>
-                <p:commandButton value="Stwórz" ajax="false" action="#{registerController.onRegisterUser}" />
-                <br />
-                <ui:fragment rendered="#{registerController.loginOrEmailInvalid}">
-                    <h:outputText value="Wybrany login lub email jest zajęty." style="color: darkred"/>
-                </ui:fragment>
-            </p:panel>
+        <h:form id="mainForm">
+            <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
+            <p:dataTable id="usersTable" value="#{userController.users}" var="user" rowKey="#{user.uid}"
+                         emptyMessage="Brak użytkowników w systemie."
+                         paginator="true"
+                         paginatorAlwaysVisible="false"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         rows="10"
+                         rowsPerPageTemplate="10">
+                <f:facet name="header">
+                    Użytkownicy systemu
+                </f:facet>
+                <p:column headerText="ID użytkownika">
+                    #{user.id}
+                </p:column>
+                <p:column headerText="Login">
+                    #{user.login}
+                </p:column>
+                <p:column headerText="E-mail">
+                    #{user.email}
+                </p:column>
+                <p:column headerText="Imię">
+                    #{user.firstName}
+                </p:column>
+                <p:column headerText="Nazwisko">
+                    #{user.lastName}
+                </p:column>
+                <p:column headerText="Administrator">
+                    <h:panelGroup rendered="#{!user.hasAdminRole()}">
+                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{user.hasAdminRole()}">
+                        <p:commandButton type="button" icon="pi pi-check" styleClass="rounded-button" disabled="true"/>
+                    </h:panelGroup>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </div>
 

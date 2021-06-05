@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
+    @Override
     public boolean verify(String login, String password) {
         User user = userDao.findByLogin(login).orElse(null);
         return user != null ? password.equals(user.getPassword()) : false;

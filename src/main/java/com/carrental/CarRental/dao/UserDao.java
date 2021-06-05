@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface UserDao {
     public Optional<User> findByLogin(String login);
     public Optional<User> findByLoginOrEmail(String login, String email);
+    public List<User> findAll();
     public void saveUser(User user);
 }

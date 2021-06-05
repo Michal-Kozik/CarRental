@@ -28,11 +28,14 @@
         <p:menuitem rendered="#{userBean.logged}" value="Profil" outcome="/forClient/profile" icon="pi pi-fw pi-user">
             <f:param name="i" value="3"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged and userBean.hasAdminRights()}" value="Zarządzanie samochodami" outcome="/forAdmin/cars" icon="pi pi-fw pi-calendar">
+        <p:menuitem rendered="#{userBean.logged and userBean.user.hasAdminRole()}" value="Zarządzanie samochodami" outcome="/forAdmin/cars" icon="pi pi-fw pi-calendar">
             <f:param name="i" value="4"/>
         </p:menuitem>
-        <p:menuitem rendered="#{userBean.logged and userBean.hasAdminRights()}" value="Zarządzanie rezerwacjami" outcome="/forAdmin/allReservations" icon="pi pi-fw pi-calendar">
+        <p:menuitem rendered="#{userBean.logged and userBean.user.hasAdminRole()}" value="Zarządzanie rezerwacjami" outcome="/forAdmin/allReservations" icon="pi pi-fw pi-calendar">
             <f:param name="i" value="5"/>
+        </p:menuitem>
+        <p:menuitem rendered="#{userBean.logged and userBean.user.hasAdminRole()}" value="Użytkownicy systemu" outcome="/forAdmin/users" icon="pi pi-fw pi-calendar">
+            <f:param name="i" value="6"/>
         </p:menuitem>
     </p:tabMenu>
 

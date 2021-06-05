@@ -35,7 +35,7 @@ public class AuthFilter implements Filter {
                 response.sendRedirect(request.getContextPath()+"/login.xhtml");
                 return;
             }
-            if (userBean.isLogged() && !userBean.hasAdminRights()) {
+            if (userBean.isLogged() && !userBean.getUser().hasAdminRole()) {
                 HttpServletResponse response = (HttpServletResponse) servletResponse;
                 response.sendRedirect(request.getContextPath()+"/errors/forbidden-403.xhtml");
                 return;

@@ -38,6 +38,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> findAll() {
+        return entityManager.createNamedQuery("User.findAll", User.class).getResultList();
+    }
+
+    @Override
     public void saveUser(User user) {
         if (user.getId() == null)
             entityManager.persist(user);

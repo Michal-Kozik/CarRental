@@ -7,6 +7,7 @@ import java.util.List;
 public interface UserService {
     public User findByLogin(String login);
     public User findByLoginOrEmail(String login, String email);
+    public List<User> findAll();
     public boolean verify(String login, String password);
     public void saveUser(User user);
 }
