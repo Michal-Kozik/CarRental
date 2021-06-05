@@ -5,6 +5,8 @@ import com.carrental.CarRental.model.Car;
 import com.carrental.CarRental.model.Reservation;
 import com.carrental.CarRental.service.CarService;
 import com.carrental.CarRental.service.ReservationService;
+import com.carrental.CarRental.util.JSF;
+import com.carrental.CarRental.util.JavaMail;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -61,7 +63,7 @@ public class ReservationController implements Serializable {
     }
 
     // Methods.
-    public String onReservation(Car car) {
+    public void onReservation(Car car) throws Exception {
         Reservation reservation = new Reservation();
         reservation.setReservationFrom(new Date());
         userBean.getUser().addReservation(reservation);
@@ -69,6 +71,11 @@ public class ReservationController implements Serializable {
         carService.save(car);
         car.addReservation(reservation);
         reservationService.saveReservation(reservation);
-        return "/forClient/clientReservations";
+        JSF.redirect("/forClient/clientReservations.xhtml");
+        // Wysylanie mejla bedzie tylko dla uzytkownika, ktoremu stworzono poczte, aby bylo mozna sprawdzic dzialanie JavaMail.
+        // W domyslnej wersji aplikacji, ponizszy warunek bylby zdjety.
+        if (userBean.getUser().getEmail().equals("klientklientowski123@gmail.com")) {
+            JavaMail.sendMail(userBean.getUser().getEmail());
+        }
     }
 }
