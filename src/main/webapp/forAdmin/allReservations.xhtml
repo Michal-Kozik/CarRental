@@ -6,10 +6,10 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Index XHTML</title>
+    <title>All Reservations</title>
 </h:head>
 <h:body>
-    <p:tabMenu activeIndex="1">
+    <p:tabMenu activeIndex="5">
         <p:menuitem value="Strona główna" outcome="/home" icon="pi pi-fw pi-home">
             <f:param name="i" value="0"/>
         </p:menuitem>
@@ -39,8 +39,8 @@
     <div class="ui-card" style="padding: 5px">
         <h:form id="mainForm">
             <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
-            <p:dataTable id="carTable" value="#{reservationController.cars}" var="car" rowKey="#{car.uid}"
-                         emptyMessage="Brak samochodów dostępnych samochodów."
+            <p:dataTable id="reservationsTable" value="#{reservationController.allReservations}" var="reservation" rowKey="#{reservation.uid}"
+                         emptyMessage="Lista rezerwacji jest pusta."
                          paginator="true"
                          paginatorAlwaysVisible="false"
                          paginatorPosition="bottom"
@@ -48,36 +48,29 @@
                          rows="5"
                          rowsPerPageTemplate="5">
                 <f:facet name="header">
-                    Dostępne samochody
+                    Lista rezerwacji
                 </f:facet>
-                <p:column headerText="ID">
-                    #{car.id}
+                <p:column headerText="ID rezerwacji">
+                    #{reservation.id}
                 </p:column>
                 <p:column headerText="Marka">
-                    #{car.brand}
+                    #{reservation.car.brand}
                 </p:column>
-                <p:column headerText="Ilość drzwi">
-                    #{car.numberOfDoors}
-                </p:column>
-                <p:column headerText="Ilość miejsc">
-                    #{car.numberOfSeats}
-                </p:column>
-                <p:column headerText="Manualna skrzynia biegów">
-                    #{car.manualGearbox}
-                </p:column>
-                <p:column headerText="Klimatyzacja">
-                    #{car.airConditioning}
+                <p:column headerText="ID samochodu">
+                    #{reservation.car.id}
                 </p:column>
                 <p:column headerText="Cena">
-                    <h:outputText value="#{car.price}">
+                    <h:outputText value="#{reservation.car.price}">
                         <f:convertNumber locale="pl-PL" type="currency" currencySymbol="zł"/>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="Stan">
-                    #{car.state}
+                <p:column headerText="Klient">
+                    #{reservation.user.login}
                 </p:column>
-                <p:column headerText="Zarezerwuj" width="80" style="text-align: center;">
-                    <p:commandButton icon="fa fa-fw fa-shopping-cart" action="#{reservationController.onReservation(car)}" title="Zarezerwuj" />
+                <p:column headerText="Zarezerwowano">
+                    <h:outputText value="#{reservation.reservationFrom}">
+                        <f:convertDateTime type="date" pattern="dd.MM.yyyy" timeZone="CET"/>
+                    </h:outputText>
                 </p:column>
             </p:dataTable>
         </h:form>

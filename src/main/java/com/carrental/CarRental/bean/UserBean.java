@@ -1,5 +1,6 @@
 package com.carrental.CarRental.bean;
 
+import com.carrental.CarRental.model.User;
 import com.carrental.CarRental.model.UserGroup;
 
 import javax.enterprise.context.SessionScoped;
@@ -11,6 +12,7 @@ import java.util.List;
 @SessionScoped
 public class UserBean implements Serializable {
     private String login;
+    private User user;
     private List<UserGroup> roles;
 
     public boolean isLogged() {
@@ -32,6 +34,14 @@ public class UserBean implements Serializable {
 
     public void setRoles(List<UserGroup> roles) {
         this.roles = roles;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     // Methods

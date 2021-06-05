@@ -45,8 +45,8 @@ public class LoginController implements Serializable {
     public void onLogin() throws IOException, ServletException {
         if (userService.verify(login, password)) {
             userBean.setLogin(login);
-            //
             userBean.setRoles(userService.findByLogin(login).getUserGroups());
+            userBean.setUser(userService.findByLogin(login));
             JSF.redirect("home.xhtml");
         } else {
             JSF.addErrorMessage("Niepoprawne dane");
