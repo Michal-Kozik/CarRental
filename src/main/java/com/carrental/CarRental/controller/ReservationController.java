@@ -88,4 +88,15 @@ public class ReservationController implements Serializable {
         reservation.getCar().setState(Car.State.AVAILABLE);
         carService.save(reservation.getCar());
     }
+
+    public void onReservationGiveCar(Reservation reservation) {
+        reservation.getCar().setState(Car.State.OCCUPIED);
+        carService.save(reservation.getCar());
+    }
+
+    public void onReservationGetCar(Reservation reservation) {
+        reservation.getCar().setState(Car.State.AVAILABLE);
+        carService.save(reservation.getCar());
+        onRemoveReservation(reservation);
+    }
 }

@@ -77,4 +77,20 @@ public class CarController implements Serializable {
             return false;
         }
     }
+
+    public boolean isCarBooked(Car car) {
+        if (car.getState() == Car.State.BOOKED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCarOccupied(Car car) {
+        if (car.getState() == Car.State.OCCUPIED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

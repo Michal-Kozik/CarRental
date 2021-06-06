@@ -75,6 +75,22 @@
                         <f:convertDateTime type="date" pattern="dd.MM.yyyy" timeZone="CET"/>
                     </h:outputText>
                 </p:column>
+                <p:column headerText="Daj kluczyki">
+                    <h:panelGroup rendered="#{carController.isCarBooked(reservation.car)}">
+                        <p:commandButton value="Daj" action="#{reservationController.onReservationGiveCar(reservation)}" styleClass="ui-button" process="@this" update=":mainForm:reservationsTable"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!carController.isCarBooked(reservation.car)}">
+                        <p:commandButton value="Daj" disabled="true" styleClass="ui-button"/>
+                    </h:panelGroup>
+                </p:column>
+                <p:column headerText="Odbierz kluczyki">
+                    <h:panelGroup rendered="#{carController.isCarOccupied(reservation.car)}">
+                        <p:commandButton value="Odbierz" action="#{reservationController.onReservationGetCar(reservation)}" styleClass="ui-button" process="@this" update=":mainForm:reservationsTable"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!carController.isCarOccupied(reservation.car)}">
+                        <p:commandButton value="Odbierz" disabled="true" styleClass="ui-button"/>
+                    </h:panelGroup>
+                </p:column>
             </p:dataTable>
         </h:form>
     </div>
