@@ -65,10 +65,20 @@
                     #{car.numberOfSeats}
                 </p:column>
                 <p:column headerText="Manualna skrzynia biegów">
-                    #{car.manualGearbox}
+                    <h:panelGroup rendered="#{!car.manualGearbox}">
+                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{car.manualGearbox}">
+                        <p:commandButton type="button" icon="pi pi-check" styleClass="rounded-button" disabled="true"/>
+                    </h:panelGroup>
                 </p:column>
                 <p:column headerText="Klimatyzacja">
-                    #{car.airConditioning}
+                    <h:panelGroup rendered="#{!car.airConditioning}">
+                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{car.airConditioning}">
+                        <p:commandButton type="button" icon="pi pi-check" styleClass="rounded-button" disabled="true"/>
+                    </h:panelGroup>
                 </p:column>
                 <p:column headerText="Cena (zł)">
                     <h:outputText value="#{car.price}">
@@ -109,10 +119,12 @@
                 <p:inputText id="numberOfSeats" value="#{carController.editedCar.numberOfSeats}" required="true"/>
                 <p:outputLabel value="Ilość drzwi" for="@next"/>
                 <p:inputText id="numberOfDoors" value="#{carController.editedCar.numberOfDoors}" required="true"/>
+
                 <p:outputLabel value="Klimatyzacja" for="@next"/>
-                <p:inputText id="airConditioning" value="#{carController.editedCar.airConditioning}" required="true"/>
+                <p:selectBooleanCheckbox id="airConditioning" value="#{carController.editedCar.airConditioning}"/>
                 <p:outputLabel value="Manualna skrzynia biegów" for="@next"/>
-                <p:inputText id="manualGearbox" value="#{carController.editedCar.manualGearbox}" required="true"/>
+                <p:selectBooleanCheckbox id="manualGearbox" value="#{carController.editedCar.manualGearbox}"/>
+
                 <p:outputLabel value="Cena" for="@next"/>
                 <p:inputText id="price" value="#{carController.editedCar.price}" required="true">
                     <f:convertNumber locale="pl-PL" type="currency"/>

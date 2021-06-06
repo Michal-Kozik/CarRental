@@ -66,10 +66,20 @@
                     #{car.numberOfSeats}
                 </p:column>
                 <p:column headerText="Manualna skrzynia biegów">
-                    #{car.manualGearbox}
+                    <h:panelGroup rendered="#{!car.manualGearbox}">
+                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{car.manualGearbox}">
+                        <p:commandButton type="button" icon="pi pi-check" styleClass="rounded-button" disabled="true"/>
+                    </h:panelGroup>
                 </p:column>
                 <p:column headerText="Klimatyzacja">
-                    #{car.airConditioning}
+                    <h:panelGroup rendered="#{!car.airConditioning}">
+                        <p:commandButton type="button" icon="pi pi-times" styleClass="rounded-button ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{car.airConditioning}">
+                        <p:commandButton type="button" icon="pi pi-check" styleClass="rounded-button" disabled="true"/>
+                    </h:panelGroup>
                 </p:column>
                 <p:column headerText="Cena">
                     <h:outputText value="#{car.price}">
