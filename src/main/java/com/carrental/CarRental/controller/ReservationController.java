@@ -75,7 +75,7 @@ public class ReservationController implements Serializable {
         // Wysylanie mejla bedzie tylko dla uzytkownika, ktoremu stworzono poczte, aby bylo mozna sprawdzic dzialanie JavaMail.
         // W domyslnej wersji aplikacji, ponizszy warunek bylby zdjety.
         if (userBean.getUser().getEmail().equals("klientklientowski123@gmail.com")) {
-            JavaMail.sendMail(userBean.getUser().getEmail());
+            JavaMail.sendMail(userBean.getUser().getEmail(), car);
         }
     }
 }

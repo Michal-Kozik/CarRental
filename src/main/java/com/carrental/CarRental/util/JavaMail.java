@@ -1,5 +1,7 @@
 package com.carrental.CarRental.util;
 
+import com.carrental.CarRental.model.Car;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -9,7 +11,7 @@ import java.util.logging.Logger;
 
 public class JavaMail {
 
-    public static void sendMail(String recipient) throws Exception {
+    public static void sendMail(String recipient, Car car) throws Exception {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -27,18 +29,20 @@ public class JavaMail {
             }
         });
 
-        Message message = prepareMessage(session, appEmail, recipient);
+        Message message = prepareMessage(session, appEmail, recipient, car);
 
         Transport.send(message);
     }
 
-    private static Message prepareMessage(Session session, String appEmail, String recipient) {
+    private static Message prepareMessage(Session session, String appEmail, String recipient, Car car) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(appEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             message.setSubject("Złożono rezerwację.");
-            message.setText("Złożono rezerwację pomyślnie.");
+            message.setText("Złożono rezerwację pomyślnie. Oto szczegóły:\n" +
+                    "Marka: " + car.getBrand() + ",\n" +
+                    "Kwota do zapłaty: " + car.getPrice() + "zł.");
             return message;
         } catch (Exception ex) {
             Logger.getLogger(JavaMail.class.getName()).log(Level.SEVERE, null, ex);
