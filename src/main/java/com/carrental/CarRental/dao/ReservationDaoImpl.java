@@ -38,4 +38,10 @@ public class ReservationDaoImpl implements ReservationDao {
             entityManager.persist(reservation);
         entityManager.merge(reservation);
     }
+
+    @Override
+    public void deleteReservation(Reservation reservation) {
+        reservation = entityManager.merge(reservation);
+        entityManager.remove(reservation);
+    }
 }

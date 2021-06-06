@@ -78,4 +78,14 @@ public class ReservationController implements Serializable {
             JavaMail.sendMail(userBean.getUser().getEmail(), car);
         }
     }
+
+    public void onRemoveReservation(Reservation reservation) {
+        reservation.getUser().removeReservation(reservation);
+        reservation.getCar().removeReservation(reservation);
+        userReservations.remove(reservation);
+        allReservations.remove(reservation);
+        reservationService.deleteReservation(reservation);
+        reservation.getCar().setState(Car.State.AVAILABLE);
+        carService.save(reservation.getCar());
+    }
 }

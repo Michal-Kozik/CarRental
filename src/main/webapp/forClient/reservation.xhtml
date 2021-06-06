@@ -43,7 +43,7 @@
         <h:form id="mainForm">
             <p:growl id="growl" showDetail="true" showSummary="false" keepAlive=""/>
             <p:dataTable id="carTable" value="#{reservationController.cars}" var="car" rowKey="#{car.uid}"
-                         emptyMessage="Brak samochodów dostępnych samochodów."
+                         emptyMessage="Brak dostępnych samochodów."
                          paginator="true"
                          paginatorAlwaysVisible="false"
                          paginatorPosition="bottom"

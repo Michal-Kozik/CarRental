@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReservationService {
-    public List<Reservation> findAll();
-    public Optional<List<Reservation>> findReservationsByLogin(String login);
-    public void saveReservation(Reservation reservation);
+    List<Reservation> findAll();
+    Optional<List<Reservation>> findReservationsByLogin(String login);
+    void saveReservation(Reservation reservation);
+    void deleteReservation(Reservation reservation);
 }

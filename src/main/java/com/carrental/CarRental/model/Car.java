@@ -99,4 +99,9 @@ public class Car extends AbstractModel {
         this.reservations.add(reservation);
         reservation.setCar(this);
     }
+
+    public void removeReservation(Reservation reservation) {
+        this.reservations.remove(reservation);
+        reservation.setUser(null);
+    }
 }

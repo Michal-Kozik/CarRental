@@ -101,6 +101,11 @@ public class User extends AbstractModel {
         reservation.setUser(this);
     }
 
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+        reservation.setUser(null);
+    }
+
     public boolean hasAdminRole() {
         for (UserGroup userGroup : userGroups) {
             if (userGroup.getName().equals("ROLE_ADMIN")) {

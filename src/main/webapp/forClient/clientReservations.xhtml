@@ -72,9 +72,19 @@
                         <f:convertDateTime type="date" pattern="dd.MM.yyyy" timeZone="CET"/>
                     </h:outputText>
                 </p:column>
+                <p:column headerText="Anuluj Rezerwację">
+                    <p:commandButton value="Anuluj" styleClass="ui-button-danger" action="${reservationController.onRemoveReservation(reservation)}" process="@this" update=":mainForm:reservationsTable">
+                        <p:confirm message="Jesteś pewien, że chcesz anulować tą rezerwację?" icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
         </h:form>
     </div>
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Potwierdzenie" >
+        <p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+        <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+    </p:confirmDialog>
 
 </h:body>
 </html>

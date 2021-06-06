@@ -82,9 +82,14 @@
                     <p:commandButton icon="fa fa-fw fa-edit" title="Edytuj" action="#{carController.onEditCar(car)}" process="@this" update=":carDlg" oncomplete="PF('carDlg').show()" />
                 </p:column>
                 <p:column headerText="Usuń" width="80" style="text-align: center;">
-                    <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" action="#{carController.onRemoveCar(car)}" process="@this" update=":mainForm:carTable" styleClass="ui-button-danger">
-                        <p:confirm message="Jesteś pewien, że chcesz usunąć ten pojazd?" icon="pi pi-exclamation-triangle" />
-                    </p:commandButton>
+                    <h:panelGroup rendered="#{carController.isCarAvailable(car)}">
+                        <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" action="#{carController.onRemoveCar(car)}" process="@this" update=":mainForm:carTable" styleClass="ui-button-danger">
+                            <p:confirm message="Jesteś pewien, że chcesz usunąć ten pojazd?" icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!carController.isCarAvailable(car)}">
+                        <p:commandButton icon="fa fa-fw fa-remove" title="Usuń" styleClass="ui-button-danger" disabled="true"/>
+                    </h:panelGroup>
                 </p:column>
                 <f:facet name="footer">
                     <div style="text-align: left">
