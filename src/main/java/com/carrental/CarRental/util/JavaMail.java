@@ -2,6 +2,8 @@ package com.carrental.CarRental.util;
 
 import com.carrental.CarRental.model.Car;
 
+import javax.ejb.Asynchronous;
+import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -9,9 +11,11 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Stateless
 public class JavaMail {
 
-    public static void sendMail(String recipient, Car car) throws Exception {
+    @Asynchronous
+    public void sendMail(String recipient, Car car) throws Exception {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
